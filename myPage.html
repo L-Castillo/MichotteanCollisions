@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Michottean Collisions</title>
+</head>
+<body>
+<svg id = "frame" width="1000" height="400">
+    <rect id="Red" x="100" y="200" width="100" height="100" style="fill:red; stroke-width: 10;"></rect>
+    <image id="Angry" style= "visibility:hidden" xlink:href="Angry.png" x="100" y="200" width="100" height="100"></image>
+    <rect id="Blue" x="400" y="200" width="100" height="100" style="fill:blue; stroke-width: 10;"></rect>
+    <image id ="Love" style= "visibility:hidden" xlink:href="Love.png" x="400" y="200" width="100" height="100"></image>
+    <rect id="Pink" x="600" y="200" width="100" height="100" style="fill:pink; stroke-width: 10;"></rect>
+    <image id ="Surprise" style= "visibility:hidden" xlink:href="Surprise.png" x="600" y="200" width="100" height="100"></image>
+</svg>
+<button id="KeyButton" onclick="setTimeout(myFunction, 20)"> I start the animation</button>
+<button id="ModeButton" onclick="myFunction2()"> Change Mode</button>
+<h2 id="Phase Descriptor">
+    Normal
+</h2>
+<script>
+    var myEventCounter = 0;
+    var myModeCounter = 0;
+    var myBlinkCounter = 0;
+    var items = ["Red", "Pink", "Blue"];
+    var exes = ["100", "600", "400"];
+    var images = ["Angry", "Surprise", "Love"];
+    var displacementLimits = ["300", "700", "500"]
+    var i = 0;
+
+    function myFunction() {
+        let myButton = document.getElementById("KeyButton");
+        myButton.style.visibility = "hidden";
+        let id = items[myEventCounter]
+        let imageID = images[myEventCounter]
+        let myElement = document.getElementById(id);
+        let myPicture = document.getElementById(imageID);
+        let elementX = myElement.getAttribute("x");
+        let newValue = Number(elementX) + 10;
+        let displacement = String(newValue);
+        let redLimit = displacementLimits[0]
+        let pinkLimit = displacementLimits[1]
+        let blueLimit = displacementLimits[2]
+
+        myElement.setAttribute("x", displacement);
+        myPicture.setAttribute("x", displacement);
+        if (myModeCounter === 3) {
+            redLimit = "330"
+        }
+        if (displacement === redLimit) {
+            myEventCounter++;
+        } else if (displacement === pinkLimit) {
+            myEventCounter++
+        }
+        if (displacement !== blueLimit){
+            window.setTimeout(myFunction, 20);
+        }
+
+        if (myModeCounter ===2) {
+            document.getElementById("frame");
+            var colour;
+            if (myBlinkCounter % 8 === 0) {
+                colour = "black"
+            } else {
+                colour = ""
+            }
+            for (i = 0; i < 3; i++) {
+                if (colour === "black") {
+                    document.getElementById(items[i]).style.fill = "black"
+                } else {
+                    document.getElementById(items[i]).style.fill = items[i]
+                }
+                myBlinkCounter++
+                }
+            }
+    }
+    function myFunction2() {
+        for (i=0; i<3; i++) {
+            let currentItem = document.getElementById(items[i]);
+            let currentPicture = document.getElementById(images[i]);
+            let currentX = exes[i];
+            currentItem.setAttribute("x", currentX);
+            currentPicture.setAttribute("x", currentX);
+        }
+        document.getElementById("KeyButton").style.visibility = "visible";
+        myEventCounter = 0;
+        if (myModeCounter === 0) {
+            for (i=0; i<3; i++){
+                document.getElementById(images[i]).style.visibility = "visible"
+            }
+            myModeCounter++;
+            document.getElementById("Phase Descriptor").innerHTML= "Agency";
+        } else if (myModeCounter === 1) {
+            for (var i=0; i<3; i++){
+                document.getElementById(images[i]).style.visibility = "hidden"
+            }
+            document.getElementById("Phase Descriptor").innerHTML= "Pacemaker";
+            myModeCounter++;
+        } else if (myModeCounter==2){
+            document.getElementById("Phase Descriptor").innerHTML= "Overlap";
+            myModeCounter++;
+        } else {
+            document.getElementById("Phase Descriptor").innerHTML= "Normal";
+            myModeCounter = 0
+        }
+    }
+
+</script>
+</body>
+</html>
