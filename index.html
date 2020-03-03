@@ -13,7 +13,7 @@
     <rect id="Pink" x="600" y="200" width="100" height="100" style="fill:pink; stroke-width: 10;"></rect>
     <image id ="Surprise" style= "visibility:hidden" xlink:href="Surprise.png" x="600" y="200" width="100" height="100"></image>
 </svg>
-<button id="KeyButton" onclick="setTimeout(myFunction, 20)"> I start the animation</button>
+<button id="KeyButton" onclick="setTimeout(myFunction, 2)"> I start the animation</button>
 <button id="ModeButton" onclick="myFunction2()"> Change Mode</button>
 <h2 id="Phase Descriptor">
     Normal
@@ -36,7 +36,7 @@
         let myElement = document.getElementById(id);
         let myPicture = document.getElementById(imageID);
         let elementX = myElement.getAttribute("x");
-        let newValue = Number(elementX) + 10;
+        let newValue = Number(elementX) + 1;
         let displacement = String(newValue);
         let redLimit = displacementLimits[0]
         let pinkLimit = displacementLimits[1]
@@ -53,13 +53,13 @@
             myEventCounter++
         }
         if (displacement !== blueLimit){
-            window.setTimeout(myFunction, 20);
+            window.setTimeout(myFunction, 2);
         }
 
         if (myModeCounter ===2) {
             document.getElementById("frame");
             var colour;
-            if (myBlinkCounter % 8 === 0) {
+            if (myBlinkCounter % 5 === 0) {
                 colour = "black"
             } else {
                 colour = ""
