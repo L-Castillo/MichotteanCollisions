@@ -36,7 +36,7 @@
         let myElement = document.getElementById(id);
         let myPicture = document.getElementById(imageID);
         let elementX = myElement.getAttribute("x");
-        let newValue = Number(elementX) + 1;
+        let newValue = Number(elementX) + 2;
         let displacement = String(newValue);
         let redLimit = displacementLimits[0]
         let pinkLimit = displacementLimits[1]
@@ -59,7 +59,7 @@
         if (myModeCounter ===2) {
             document.getElementById("frame");
             var colour;
-            if (myBlinkCounter % 5 === 0) {
+            if (myBlinkCounter % 16 === 0) {
                 colour = "black"
             } else {
                 colour = ""
